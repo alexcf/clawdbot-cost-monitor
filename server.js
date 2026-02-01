@@ -71,11 +71,11 @@ server.listen(PORT, () => {
   console.log(`
 ╔════════════════════════════════════════════════════════════════╗
 ║                                                                ║
-║   💰 CLAWDBOT COST MONITOR v0.2                                ║
+║   💰 OPENCLAW COST MONITOR v0.2.1                              ║
 ║                                                                ║
 ║   Dashboard: http://localhost:${PORT}                            ║
 ║                                                                ║
-║   ✨ New: Historical tracking + monthly projections            ║
+║   ✨ Track your OpenClaw/Clawdbot AI spending                  ║
 ║                                                                ║
 ╚════════════════════════════════════════════════════════════════╝
   `);

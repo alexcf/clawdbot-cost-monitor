@@ -36,7 +36,7 @@ function readSessionData() {
     const sessionsPath = getSessionsPath();
     
     if (!fs.existsSync(sessionsPath)) {
-      return { error: 'Sessions file not found. Is Clawdbot running?' };
+      return { error: 'Sessions file not found. Is OpenClaw (Clawdbot) running?' };
     }
     
     const data = fs.readFileSync(sessionsPath, 'utf8');

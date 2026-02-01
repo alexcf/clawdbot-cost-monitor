@@ -1,15 +1,15 @@
-# 💰 Clawdbot Cost Monitor
+# 💰 OpenClaw Cost Monitor
 
-**Track your Clawdbot AI spending in real-time. Never get surprised by API bills again.**
+**Track your OpenClaw (formerly Clawdbot) AI spending in real-time. Never get surprised by API bills again.**
 
-Unlike Claude's platform dashboard which only shows overall API usage, this gives you Clawdbot-specific insights with historical tracking and budget projections.
+Unlike Claude's platform dashboard which only shows overall API usage, this gives you OpenClaw-specific insights with historical tracking and budget projections.
 
 ## The Problem
 
-Clawdbot users have no idea what they're spending:
+OpenClaw/Clawdbot users have no idea what they're spending:
 - "I've been using this for 2 days, spent $300+ on what felt like basic tasks" (Hacker News)
 - "Is this going to cost me $10 or $150 this month?"
-- Claude's dashboard shows API usage, but not Clawdbot-specific costs
+- Claude's dashboard shows API usage, but not OpenClaw-specific costs
 - No way to predict monthly spending
 
 ## The Solution
@@ -36,14 +36,15 @@ A beautiful real-time dashboard with advanced analytics:
 
 **🔄 Works Everywhere:**
 - ✅ All AI providers (Anthropic, OpenAI, etc.)
-- ✅ Multiple Clawdbot sessions
+- ✅ Multiple OpenClaw sessions
 - ✅ Claude Pro users tracking API overflow
+- ✅ Works with both OpenClaw and legacy Clawdbot installs
 
 ## Quick Start
 
 ```bash
 # Install dependencies
-cd clawdbot-cost-monitor
+cd openclaw-cost-monitor
 npm install
 
 # Start the dashboard
@@ -55,10 +56,12 @@ npm start
 
 ## How It Works
 
-1. Reads your Clawdbot session data from `~/.clawdbot/agents/main/sessions/sessions.json`
+1. Reads your OpenClaw session data from `~/.clawdbot/agents/main/sessions/sessions.json`
 2. Calculates costs based on official model pricing
 3. Displays everything in a clean, real-time dashboard
-4. Updates automatically as you use Clawdbot
+4. Updates automatically as you use OpenClaw
+
+**Note:** Works with both OpenClaw and legacy Clawdbot installations - the session file format is the same.
 
 ## Supported Models
 
@@ -71,7 +74,7 @@ npm start
 ## Requirements
 
 - Node.js 14+
-- An active Clawdbot installation
+- An active OpenClaw (or Clawdbot) installation
 
 ## What's Next?
 
@@ -93,7 +96,7 @@ npm start
 
 [@0xboko](https://x.com/0xboko) at [Blockstrata](https://blockstrata.co)
 
-Built with ❤️ for the Clawdbot community.
+Built with ❤️ for the OpenClaw community.
 
 ## License
 
