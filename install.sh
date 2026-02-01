@@ -1,0 +1,43 @@
+#!/bin/bash
+
+echo "╔════════════════════════════════════════════════════════════════╗"
+echo "║                                                                ║"
+echo "║   💰 CLAWDBOT COST MONITOR - INSTALLER                         ║"
+echo "║                                                                ║"
+echo "╚════════════════════════════════════════════════════════════════╝"
+echo ""
+
+# Check if Node.js is installed
+if ! command -v node &> /dev/null; then
+    echo "❌ Node.js is not installed."
+    echo "   Please install Node.js 14+ from https://nodejs.org"
+    exit 1
+fi
+
+echo "✅ Node.js found: $(node --version)"
+echo ""
+
+# Check if Clawdbot is installed
+if ! command -v clawdbot &> /dev/null; then
+    echo "⚠️  Warning: Clawdbot command not found."
+    echo "   This tool tracks Clawdbot costs. Make sure Clawdbot is installed."
+    echo ""
+fi
+
+# Install dependencies
+echo "📦 Installing dependencies..."
+npm install
+
+if [ $? -eq 0 ]; then
+    echo ""
+    echo "✅ Installation complete!"
+    echo ""
+    echo "🚀 To start the dashboard:"
+    echo "   npm start"
+    echo ""
+    echo "   Then open: http://localhost:3939"
+    echo ""
+else
+    echo "❌ Installation failed. Please check the errors above."
+    exit 1
+fi

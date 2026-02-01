@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clawdbot Cost Monitor</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      padding: 20px;
+      color: #333;
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    header {
+      text-align: center;
+      color: white;
+      margin-bottom: 30px;
+    }
+    
+    header h1 {
+      font-size: 2.5rem;
+      margin-bottom: 10px;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+    }
+    
+    header p {
+      opacity: 0.9;
+      font-size: 1.1rem;
+    }
+    
+    .status {
+      background: rgba(255,255,255,0.15);
+      border-radius: 10px;
+      padding: 10px 20px;
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.9rem;
+    }
+    
+    .status.connected {
+      background: rgba(76, 175, 80, 0.3);
+    }
+    
+    .status.error {
+      background: rgba(244, 67, 54, 0.3);
+    }
+    
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .card {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.2s;
+    }
+    
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    
+    .card h2 {
+      font-size: 0.9rem;
+      color: #666;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    
+    .card .value {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #667eea;
+      margin-bottom: 5px;
+    }
+    
+    .card .subtext {
+      font-size: 0.9rem;
+      color: #999;
+    }
+    
+    .model-breakdown {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    
+    .model-breakdown h2 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .model-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background: #f8f9fa;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+    
+    .model-name {
+      font-weight: 600;
+      color: #333;
+    }
+    
+    .model-stats {
+      text-align: right;
+    }
+    
+    .model-cost {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #667eea;
+    }
+    
+    .model-tokens {
+      font-size: 0.85rem;
+      color: #999;
+      margin-top: 3px;
+    }
+    
+    .sessions {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    
+    .sessions h2 {
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+      color: #333;
+    }
+    
+    .session-item {
+      padding: 12px;
+      border-bottom: 1px solid #eee;
+    }
+    
+    .session-item:last-child {
+      border-bottom: none;
+    }
+    
+    .session-key {
+      font-family: 'Courier New', monospace;
+      font-size: 0.85rem;
+      color: #667eea;
+      margin-bottom: 5px;
+    }
+    
+    .session-details {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: #666;
+    }
+    
+    .error-message {
+      background: white;
+      border-radius: 15px;
+      padding: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    
+    .error-message h2 {
+      color: #f44336;
+      margin-bottom: 15px;
+    }
+    
+    .error-message p {
+      color: #666;
+      line-height: 1.6;
+    }
+    
+    footer {
+      text-align: center;
+      color: white;
+      margin-top: 40px;
+      opacity: 0.8;
+    }
+    
+    .loading {
+      text-align: center;
+      color: white;
+      font-size: 1.2rem;
+      padding: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>💰 Clawdbot Cost Monitor</h1>
+      <p>Track your AI spending in real-time</p>
+      <div class="status" id="status">Connecting...</div>
+    </header>
+    
+    <div id="content">
+      <div class="loading">Loading data...</div>
+    </div>
+    
+    <footer>
+      <p>Built with ❤️ for the Clawdbot community</p>
+    </footer>
+  </div>
+  
+  <script>
+    let ws;
+    
+    function connect() {
+      const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+      ws = new WebSocket(`${protocol}//${window.location.host}`);
+      
+      ws.onopen = () => {
+        updateStatus('connected', '🟢 Connected');
+      };
+      
+      ws.onmessage = (event) => {
+        const data = JSON.parse(event.data);
+        renderData(data);
+      };
+      
+      ws.onerror = () => {
+        updateStatus('error', '🔴 Connection Error');
+      };
+      
+      ws.onclose = () => {
+        updateStatus('error', '🟡 Disconnected');
+        setTimeout(connect, 3000);
+      };
+    }
+    
+    function updateStatus(className, text) {
+      const status = document.getElementById('status');
+      status.className = `status ${className}`;
+      status.textContent = text;
+    }
+    
+    function formatCost(cost) {
+      return `$${cost.toFixed(2)}`;
+    }
+    
+    function formatTokens(tokens) {
+      if (tokens >= 1000000) {
+        return `${(tokens / 1000000).toFixed(2)}M`;
+      } else if (tokens >= 1000) {
+        return `${(tokens / 1000).toFixed(1)}K`;
+      }
+      return tokens.toString();
+    }
+    
+    function renderData(data) {
+      if (data.error) {
+        document.getElementById('content').innerHTML = `
+          <div class="error-message">
+            <h2>⚠️ Error</h2>
+            <p>${data.error}</p>
+            <p style="margin-top: 15px;">Make sure Clawdbot is running and sessions.json exists.</p>
+          </div>
+        `;
+        return;
+      }
+      
+      const totalTokens = data.totalInputTokens + data.totalOutputTokens;
+      
+      let html = `
+        <div class="cards">
+          <div class="card">
+            <h2>Total Cost</h2>
+            <div class="value">${formatCost(data.totalCost)}</div>
+            <div class="subtext">All-time spending</div>
+          </div>
+          
+          <div class="card">
+            <h2>Total Tokens</h2>
+            <div class="value">${formatTokens(totalTokens)}</div>
+            <div class="subtext">${formatTokens(data.totalInputTokens)} in · ${formatTokens(data.totalOutputTokens)} out</div>
+          </div>
+          
+          <div class="card">
+            <h2>Models Used</h2>
+            <div class="value">${Object.keys(data.byModel).length}</div>
+            <div class="subtext">${data.sessions.length} session${data.sessions.length !== 1 ? 's' : ''}</div>
+          </div>
+        </div>
+      `;
+      
+      // Model breakdown
+      const sortedModels = Object.entries(data.byModel).sort((a, b) => b[1].cost - a[1].cost);
+      
+      if (sortedModels.length > 0) {
+        html += `<div class="model-breakdown"><h2>📊 Cost by Model</h2>`;
+        
+        sortedModels.forEach(([model, stats]) => {
+          const percentage = ((stats.cost / data.totalCost) * 100).toFixed(1);
+          html += `
+            <div class="model-item">
+              <div>
+                <div class="model-name">${model}</div>
+                <div class="model-tokens">${formatTokens(stats.inputTokens + stats.outputTokens)} tokens · ${stats.sessions} session${stats.sessions !== 1 ? 's' : ''}</div>
+              </div>
+              <div class="model-stats">
+                <div class="model-cost">${formatCost(stats.cost)}</div>
+                <div class="model-tokens">${percentage}%</div>
+              </div>
+            </div>
+          `;
+        });
+        
+        html += `</div>`;
+      }
+      
+      // Sessions
+      if (data.sessions.length > 0) {
+        html += `<div class="sessions"><h2>💬 Sessions</h2>`;
+        
+        data.sessions.forEach(session => {
+          html += `
+            <div class="session-item">
+              <div class="session-key">${session.key}</div>
+              <div class="session-details">
+                <span>${session.model}</span>
+                <span>${formatTokens(session.inputTokens + session.outputTokens)} tokens · ${formatCost(session.cost)}</span>
+              </div>
+            </div>
+          `;
+        });
+        
+        html += `</div>`;
+      }
+      
+      document.getElementById('content').innerHTML = html;
+    }
+    
+    // Initialize
+    connect();
+  </script>
+</body>
+</html>
