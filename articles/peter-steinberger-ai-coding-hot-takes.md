@@ -90,22 +90,26 @@ If you try to spec everything upfront and let it run for 24 hours, you get slop.
 
 **2. Simple Workflow**
 
-Peter's setup:
-- 5 terminal windows with different checkouts (clawdbot-1, 2, 3, 4, 5)
-- Each working on a different feature/fix
-- No work trees, no fancy git flows
-- Split screen, work in parallel
+*Note: This is Peter's personal setup - most people start with 1 agent and that works great.*
 
-When one finishes:
-- Test locally
-- Push to main
-- Move on
+Peter's approach:
+- Simple terminal(s) with AI coding assistant
+- **No work trees, no fancy git flows, no orchestrators**
+- Basic loop: explore → build → test → push
+- That's it
 
-**That's it.**
+**Why he uses multiple terminals:**
+*"If you only work on one, it's very hard to get into the zone because it's just too slow... I need multiple ones to keep me hooked."*
+
+He uses 5 terminals (clawdbot-1, 2, 3, 4, 5) so while one AI is thinking, he can switch to another and stay productive.
+
+**But this is NOT required.** Most people (including many successful builders) work with just 1 agent perfectly fine.
+
+The key insight isn't "use 5 terminals" - it's **"keep it simple."**
 
 No orchestrators. No supervisors. No mission control.
 
-Just: explore → build → fix → test → ship.
+Just: One or more simple terminals + human guidance = shipping code.
 
 ---
 
@@ -231,7 +235,7 @@ His workflow?
 - No mission control
 - No fancy orchestration
 
-Just: **5 terminal windows and a conversation.**
+Just: **Simple terminals and human conversation.**
 
 Meanwhile, others are spending months building "AI orchestrators" that produce slop.
 
@@ -315,13 +319,15 @@ Most orchestration systems give "the illusion of making you more productive, but
 **Tweet 4:**
 ✅ What ACTUALLY works:
 
-5 terminal windows. Split screen. Multiple checkouts.
+Simple tools. Human conversation. Fast iteration.
 
 Build → feel → adjust → ship.
 
 No orchestrators. No supervisors. No mission control.
 
-Simple tools + human taste = 300K lines of shipping code.
+(He uses multiple terminals to stay productive while AI thinks - but 1 works fine too!)
+
+Simple approach + human taste = 300K lines of shipping code.
 
 **Tweet 5:**
 The money quote:
