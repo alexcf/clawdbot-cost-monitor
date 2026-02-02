@@ -1,10 +1,12 @@
 # 💰 OpenClaw Cost Monitor
 
-### **Beautiful real-time AI cost tracking with prompt caching analytics**
+### **Beautiful real-time AI cost tracking with LIFETIME accumulation**
 
-Track your OpenClaw (formerly Clawdbot) AI spending with a **stunning dark-theme dashboard**. Get accurate costs, understand your token usage, and see exactly how much you're saving with prompt caching.
+Track your OpenClaw (formerly Clawdbot) AI spending with a **stunning dark-theme dashboard**. Get accurate lifetime costs, understand your token usage, and see exactly how much you're saving with prompt caching.
 
-**NEW in v0.4.0:** Complete UI redesign with modern glassmorphism, smooth animations, and professional polish! 🎨
+**NEW in v0.5.0:** 🎯 **Lifetime cost tracking!** Never lose historical data again. Tracks all sessions from installation forward.
+
+**v0.4.0:** Complete UI redesign with modern glassmorphism, smooth animations, and professional polish! 🎨
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Version](https://img.shields.io/badge/version-0.4.0-blue.svg)](https://github.com/bokonon23/clawdbot-cost-monitor)
@@ -193,6 +195,15 @@ If this tool helps you track costs and save money:
 Every star helps others discover this tool! 🙏
 
 ## 📝 Version History
+
+### v0.5.0 (Feb 2, 2026) - Lifetime Tracking 🎯
+- **MAJOR:** Persistent session tracking across restarts
+- Stores all sessions seen in `~/.clawdbot-cost-monitor/`
+- Never loses historical cost data
+- Shows "tracking since" date on dashboard
+- Total sessions tracked counter
+- Accumulates costs from installation forward
+- No API keys required (provider agnostic)
 
 ### v0.4.0 (Feb 2, 2026) - UI Redesign 🎨
 - Complete UI overhaul with modern dark theme
