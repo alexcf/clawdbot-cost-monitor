@@ -9,14 +9,11 @@ Track your OpenClaw (formerly Clawdbot) AI spending with a **stunning dark-theme
 **v0.4.0:** Complete UI redesign with modern glassmorphism, smooth animations, and professional polish! 🎨
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Version](https://img.shields.io/badge/version-0.4.0-blue.svg)](https://github.com/bokonon23/clawdbot-cost-monitor)
+[![Version](https://img.shields.io/badge/version-0.5.0-blue.svg)](https://github.com/bokonon23/clawdbot-cost-monitor)
 [![Node](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen.svg)](https://nodejs.org/)
 
 ![Dashboard Screenshot](screenshots/dashboard.png)
-*Modern dark theme with real-time cost tracking and caching analytics*
-
-![Savings Card](screenshots/savings-card.png)
-*See exactly how much prompt caching is saving you*
+*Beautiful dark theme showing: lifetime cost tracking, prompt caching savings (85% off!), 7-day history chart, and real-time session monitoring*
 
 ## The Problem
 
