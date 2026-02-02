@@ -1,12 +1,20 @@
 # 💰 OpenClaw Cost Monitor
 
-**Track your OpenClaw (formerly Clawdbot) AI spending in real-time. Never get surprised by API bills again.**
+### **Beautiful real-time AI cost tracking with prompt caching analytics**
 
-Unlike Claude's platform dashboard which only shows overall API usage, this gives you OpenClaw-specific insights with historical tracking and budget projections.
+Track your OpenClaw (formerly Clawdbot) AI spending with a **stunning dark-theme dashboard**. Get accurate costs, understand your token usage, and see exactly how much you're saving with prompt caching.
+
+**NEW in v0.4.0:** Complete UI redesign with modern glassmorphism, smooth animations, and professional polish! 🎨
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Version](https://img.shields.io/badge/version-0.4.0-blue.svg)](https://github.com/bokonon23/clawdbot-cost-monitor)
+[![Node](https://img.shields.io/badge/node-%3E%3D14.0.0-brightgreen.svg)](https://nodejs.org/)
 
 ![Dashboard Screenshot](screenshots/dashboard.png)
+*Modern dark theme with real-time cost tracking and caching analytics*
 
-![Budget Alert](screenshots/budget-alert.png)
+![Savings Card](screenshots/savings-card.png)
+*See exactly how much prompt caching is saving you*
 
 ## The Problem
 
@@ -57,19 +65,26 @@ A **stunning, modern dashboard** with advanced analytics and beautiful UI:
 - ✅ Claude Pro users tracking API overflow
 - ✅ Works with both OpenClaw and legacy Clawdbot installs
 
-## Quick Start
+## ⚡ Quick Start
+
+Get up and running in 30 seconds:
 
 ```bash
-# Install dependencies
-cd openclaw-cost-monitor
+git clone https://github.com/bokonon23/clawdbot-cost-monitor.git
+cd clawdbot-cost-monitor
 npm install
-
-# Start the dashboard
 npm start
-
-# Open in your browser
-# http://localhost:3939
 ```
+
+Then open **http://localhost:3939** in your browser. That's it!
+
+The dashboard automatically:
+- Detects your OpenClaw installation
+- Reads session data from `~/.clawdbot/agents/main/sessions/sessions.json`
+- Updates costs in real-time (every 5 seconds)
+- Shows prompt caching savings
+
+**No configuration required.** Just run it.
 
 ## How It Works
 
@@ -120,33 +135,96 @@ If you were using the old version (v0.2.x or earlier), costs were **overestimate
 - GPT-3.5 Turbo
 - And more...
 
-## Requirements
+## 📋 Requirements
 
-- Node.js 14+
-- An active OpenClaw (or Clawdbot) installation
+- **Node.js 14+** (16+ recommended)
+- **OpenClaw or Clawdbot** installed and running
+- Sessions file at `~/.clawdbot/agents/main/sessions/sessions.json`
 
-## What's Next?
+## 🐛 Troubleshooting
 
-**v0.3 (Future):**
-- Export to CSV
-- Email/Telegram alerts
-- Configurable budget limits (currently $50)
-- Multi-agent comparison
-- Cost optimization suggestions
-- Historical data beyond 30 days
+**"Error: Sessions file not found"**
+- Make sure OpenClaw/Clawdbot is installed and has run at least once
+- Check that the path `~/.clawdbot/agents/main/sessions/sessions.json` exists
 
-## Pricing
+**"Costs seem wrong"**
+- Make sure you're on **v0.3.0 or later** (accurate caching support)
+- Check GitHub for the latest version: `git pull origin main`
 
-**Currently:** Free and open source
+**"Connection error / Won't connect"**
+- Port 3939 might be in use. Check with: `lsof -i :3939`
+- Kill the process and restart: `npm start`
 
-**Future:** Optional $5/month for cloud-hosted version with historical data
+**Still stuck?** [Open an issue](https://github.com/bokonon23/clawdbot-cost-monitor/issues) with details!
 
-## Built By
+## 🚀 Roadmap
 
-[@0xboko](https://x.com/0xboko) at [Blockstrata](https://blockstrata.co)
+**Planned Features:**
+- [ ] Export data to CSV
+- [ ] Email/Telegram/Discord alerts
+- [ ] Multi-agent cost comparison
+- [ ] Cost optimization suggestions
+- [ ] Extended historical data (30+ days)
+- [ ] Custom time range filtering
+- [ ] Cost forecasting with ML
+- [ ] Docker deployment option
 
-Built with ❤️ for the OpenClaw community.
+**Want a feature?** [Open an issue](https://github.com/bokonon23/clawdbot-cost-monitor/issues) and let me know!
 
-## License
+## 🤝 Contributing
 
-MIT
+This is a community tool! Contributions are welcome:
+
+1. Fork the repo
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+Found a bug? [Report it here](https://github.com/bokonon23/clawdbot-cost-monitor/issues).
+
+## ⭐ Show Your Support
+
+If this tool helps you track costs and save money:
+- Star this repo on GitHub
+- Share it with the OpenClaw community
+- Tweet about it (tag [@0xboko](https://x.com/0xboko))
+
+Every star helps others discover this tool! 🙏
+
+## 📝 Version History
+
+### v0.4.0 (Feb 2, 2026) - UI Redesign 🎨
+- Complete UI overhaul with modern dark theme
+- Glassmorphism effects with animated particles
+- Smooth animations and micro-interactions
+- Professional gradient cards with hover effects
+- Fully responsive mobile-first design
+- Enhanced data visualization
+
+### v0.3.0 (Feb 1, 2026) - Caching Fix
+- **MAJOR FIX:** Accurate prompt caching cost calculation
+- Added cache write/read pricing (90% discount)
+- Green savings card showing caching benefits
+- Detailed token breakdown (input/output/cached)
+- Fixed 10x cost overestimation bug
+
+### v0.2.x (Jan 2026) - Initial Release
+- Basic cost tracking
+- 7-day history charts
+- Budget projections
+- Real-time updates
+
+## 🙏 Built By
+
+Created by [@0xboko](https://x.com/0xboko) at [Blockstrata](https://blockstatra.co)
+
+Built with ❤️ for the OpenClaw community. Free forever.
+
+## 📄 License
+
+MIT License - do whatever you want with it!
+
+---
+
+**Found this useful?** [⭐ Star it on GitHub](https://github.com/bokonon23/clawdbot-cost-monitor) to help others discover it!
