@@ -18,25 +18,38 @@ OpenClaw/Clawdbot users have no idea what they're spending:
 
 ## The Solution
 
-A beautiful real-time dashboard with advanced analytics:
+A **stunning, modern dashboard** with advanced analytics and beautiful UI:
+
+**🎨 Beautiful Dark Theme UI (NEW in v0.4.0):**
+- ✅ Modern glassmorphism design with animated particles
+- ✅ Smooth animations and micro-interactions
+- ✅ Professional gradient cards with hover effects
+- ✅ Fully responsive mobile-first design
+- ✅ Dark mode optimized for long viewing sessions
 
 **📊 Real-Time Tracking:**
 - ✅ Live cost updates (refreshes every 5 seconds)
 - ✅ Total cost across all sessions
-- ✅ Token usage breakdown (input/output)
+- ✅ Token usage breakdown (input/output/cached)
 - ✅ Cost by model (Claude, GPT, etc.)
-- ✅ Per-session details
+- ✅ Interactive tooltips explaining costs
+
+**💚 Prompt Caching Analytics (v0.3.0+):**
+- ✅ Shows exactly how much you're saving with caching
+- ✅ 90% discount visualization on cached tokens
+- ✅ Detailed breakdown of token types
+- ✅ Green "savings card" celebrating your discounts
 
 **📈 Historical Analytics:**
-- ✅ 7-day cost history with charts
+- ✅ 7-day cost history with beautiful charts
 - ✅ Daily spending trends
-- ✅ Visual graphs powered by Chart.js
+- ✅ Animated Chart.js visualizations
 
 **🎯 Budget Projections:**
 - ✅ Monthly cost projection based on usage
 - ✅ Daily burn rate calculation
-- ✅ Budget alerts when exceeding $50/month
-- ✅ "At this rate, you'll spend $X this month"
+- ✅ Configurable budget alerts
+- ✅ Warning and critical alert states
 
 **🔄 Works Everywhere:**
 - ✅ All AI providers (Anthropic, OpenAI, etc.)
