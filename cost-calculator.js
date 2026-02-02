@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const { accumulateSessions } = require('./session-accumulator');
 
 // Model pricing (per million tokens)
 // Note: Anthropic models support prompt caching which dramatically reduces costs
@@ -107,7 +108,9 @@ function analyzeUsage() {
   }
   
   const { sessions } = result;
-  const analysis = {
+  
+  // First, analyze current sessions (from sessions.json)
+  const currentAnalysis = {
     totalInputTokens: 0,
     totalOutputTokens: 0,
     totalCacheWriteTokens: 0,
@@ -147,33 +150,8 @@ function analyzeUsage() {
     const costResult = calculateCost(tokenBreakdown, fullModel);
     const cost = costResult.total;
     
-    analysis.totalInputTokens += inputTokens;
-    analysis.totalOutputTokens += outputTokens;
-    analysis.totalCacheWriteTokens += cacheWriteTokens;
-    analysis.totalCacheReadTokens += cacheReadTokens;
-    analysis.totalCost += cost;
-    
-    // Track by model
-    if (!analysis.byModel[fullModel]) {
-      analysis.byModel[fullModel] = {
-        inputTokens: 0,
-        outputTokens: 0,
-        cacheWriteTokens: 0,
-        cacheReadTokens: 0,
-        cost: 0,
-        sessions: 0
-      };
-    }
-    
-    analysis.byModel[fullModel].inputTokens += inputTokens;
-    analysis.byModel[fullModel].outputTokens += outputTokens;
-    analysis.byModel[fullModel].cacheWriteTokens += cacheWriteTokens;
-    analysis.byModel[fullModel].cacheReadTokens += cacheReadTokens;
-    analysis.byModel[fullModel].cost += cost;
-    analysis.byModel[fullModel].sessions += 1;
-    
-    // Session details
-    analysis.sessions.push({
+    // Session details for current analysis
+    currentAnalysis.sessions.push({
       key: sessionKey,
       model: fullModel,
       inputTokens,
@@ -186,7 +164,10 @@ function analyzeUsage() {
     });
   }
   
-  return analysis;
+  // Now accumulate with historical data
+  const accumulatedAnalysis = accumulateSessions(currentAnalysis);
+  
+  return accumulatedAnalysis;
 }
 
 module.exports = {

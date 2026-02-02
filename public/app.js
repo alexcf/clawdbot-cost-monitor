@@ -240,7 +240,42 @@ function renderData(data) {
                       data.totalCacheReadTokens + data.totalCacheWriteTokens;
   const budget = getBudget();
   
+  // Format tracking start date
+  let trackingSinceText = '';
+  if (data.metadata && data.metadata.trackingSince) {
+    const trackingDate = new Date(data.metadata.trackingSince);
+    trackingSinceText = trackingDate.toLocaleDateString('en-US', { 
+      month: 'short', 
+      day: 'numeric',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+  }
+  
   let html = '';
+  
+  // Tracking info banner
+  if (data.metadata && data.metadata.trackingSince) {
+    html += `
+      <div class="stat-card" style="background: rgba(102, 126, 234, 0.1); border-color: rgba(102, 126, 234, 0.3); margin-bottom: 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <div style="font-size: 0.85rem; color: #94a3b8; margin-bottom: 5px;">📊 TRACKING LIFETIME COSTS</div>
+            <div style="font-size: 1rem; color: #f1f5f9;">
+              Started tracking: <strong>${trackingSinceText}</strong>
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 0.85rem; color: #94a3b8;">Sessions tracked</div>
+            <div style="font-size: 1.5rem; font-weight: 700; color: #667eea;">
+              ${data.metadata.totalSessionsSeen || 0}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }
   
   // Budget alert
   if (data.totalCost > budget * 0.8) {
